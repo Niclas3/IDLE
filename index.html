@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>InIDEL－不虚度</title>
+	<link rel="stylesheet" href="css/uikit.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/fullcalendar.css">
+	<link rel='stylesheet' href='css/fullcalendar.print.css' media='print' />
+</head>
+<body>
+	<nav class="uk-navbar">
+		<a href="#" class="uk-navbar-brand">InIDEL</a>
+		<div class="uk-navbar-flip">
+        	<ul class="uk-navbar-nav">
+            	<li><a href="#my-id" data-uk-offcanvas>查看日程</a></li>
+            	<li><a href="#" class="uk-text-middle"><i class="uk-icon-user"></i>xxx</a></li>
+        	</ul>
+    	</div>
+	</nav>
+	<div class="main uk-grid">
+		<div class="date uk-width-10-10">
+			<div id='calendar'></div>
+		</div>
+		<!-- 这事弹出式的边栏 -->
+		<div id="my-id" class="uk-offcanvas">
+		    <div class="uk-offcanvas-bar uk-offcanvas-bar-flip">...</div>
+		</div>
+	</div>
+	<footer>
+		copyright&copy;zm
+	</footer>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/uikit.min.js"></script>
+	<script src="js/moment.min.js"></script>
+	<script src='js/jquery-ui.custom.min.js'></script>
+	<script src="js/fullcalendar.min.js"></script>
+	<script src='js/zh-cn.js'></script>
+	<script>
+	$(document).ready(function() {
+    // page is now ready, initialize the calendar...
+    $('#calendar').fullCalendar({
+			// theme: true,
+			header: {
+				left: 'month,agendaWeek,agendaDay',
+				center: 'prev,title,next',
+				right: 'today'
+			},
+			selectable: true,
+			selectHelper: true,
+			select: function(start, end) {
+				var title = prompt('Event Title:');
+				var eventData;
+				if (title) {
+					eventData = {
+						title: title,
+						start: start,
+						end: end
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+				}
+				$('#calendar').fullCalendar('unselect');
+			},
+			editable: true,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2014-06-01'
+				},
+				{
+					title: 'Long Event',
+					start: '2014-06-07',
+					end: '2014-06-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-06-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2014-06-16T16:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2014-06-12T10:30:00',
+					end: '2014-06-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2014-06-12T12:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2014-06-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2014-06-28'
+				}
+			]
+    	});
+	});
+	</script>
+</body>
+</html>
